@@ -6,8 +6,8 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon index.js",
-    "app": "node api.js",
-    "vercel-build" : "echo "
+    "app": "node index.js",
+    "vercel-build" : "echo hello",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
