@@ -20,3 +20,5 @@ app.use(get_router);
 app.use(post_router);
 
 app.listen(PORT, () => console.log(`listening on port ${PORT}`));
+
+export default app
