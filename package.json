@@ -5,8 +5,9 @@
   "main": "api.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon api.js",
+    "dev": "nodemon index.js",
     "app": "node api.js",
+    "vercel-build" : "echo "
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
