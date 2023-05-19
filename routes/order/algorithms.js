@@ -1,9 +1,9 @@
 const URL = "https://www.datos.gov.co/resource/fvq4-wwtz.json";
 
-export const bubbleSort = (list) => {
+export const bubbleSort = (list,attr) => {
   for (let i = 0; i <= list.length - 2; i++) {
     for (let j = 0; j <= list.length - i - 2; j++) {
-      if (list[j] > list[j + 1]) {
+      if (parseFloat(list[j][attr]) > parseFloat(list[j + 1][attr])) {
         [list[j], list[j + 1]] = [list[j + 1], list[j]];
       }
     }
@@ -11,7 +11,7 @@ export const bubbleSort = (list) => {
   return list;
 };
 
-export const quickSort = (list) => {
+export const quickSort = (list,attr) => {
   const base = list.length;
 
   if (base <= 1) return list;
@@ -75,4 +75,4 @@ export const radixSort = (list) => {
 
 export default URL;
 
-console.log(radixSort([10000, 9, 8, 7, 6, 5, 4, 3, 2, 1]));
+// console.log(radixSort([10000, 9, 8, 7, 6, 5, 4, 3, 2, 1]));
