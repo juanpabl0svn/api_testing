@@ -1,10 +1,17 @@
-import URL, { bubbleSort, quickSort } from "./algorithms.js";
+import URL, { bubbleSort, mergeSort, quickSort } from "./algorithms.js";
 import { Router } from "express";
+import db_order from "../json/db_order.js";
+import { PORT } from "../../index.js";
 
 const router = Router();
 
+const isNumeric = (n) => Number(n);
+
 const getData = async () => {
   try {
+    if (db_order) {
+      return db_order;
+    }
     const request = await fetch(URL);
     const response = await request.json();
     return response;
@@ -14,7 +21,13 @@ const getData = async () => {
   }
 };
 
-router.get("/", async (req, res) => {
+router.get("/", (req, res) => {
+  res.send(
+    `Welcome to order algorithms, here you will be able to order a public database, which you can see in the path next path <a href="http://localhost:${PORT}/order/data">Database</a>, you will also be able to order these registers using this algoritms and giving as a parameter an atribute of the database, here are some examples <a href="http://localhost:3000/order/bubble/cod_institucion">Bubble sort</a>, <a href="http://localhost:${PORT}/order/quick/cod_institucion">Quick sort</a>, <a href="http://localhost:${PORT}/order/merge/cod_institucion">Merge sort</a>`
+  );
+});
+
+router.get("/data", async (req, res) => {
   const data = await getData();
   data
     ? res.status(200).json({ message: data })
@@ -23,12 +36,50 @@ router.get("/", async (req, res) => {
 
 router.get("/bubble/:attr", async (req, res) => {
   const data = await getData();
+  const attr = req.params.attr;
+  const number = parseInt(data[0][attr]);
 
-  const attr = req.params.attr || "no_carrera";
+  if (!isNumeric(number) && number != 0) {
+    res
+      .status(400)
+      .json({ message: "Invalid parameter, enter a numeric parameter" });
+  } else {
+    const new_data = bubbleSort(data, attr);
+    res.send(new_data);
+  }
+});
 
-  const new_data = bubbleSort(data, attr);
 
-  res.send(new_data);
+router.get("/quick/:attr", async (req, res) => {
+  const data = await getData();
+  const attr = req.params.attr;
+  const number = parseInt(data[0][attr]);
+
+
+  if (!isNumeric(number) && number != 0) {
+    res
+      .status(400)
+      .json({ message: "Invalid parameter, enter a numeric parameter" });
+  } else {
+    const new_data = quickSort(data, attr);
+    res.send(new_data);
+  }
+});
+
+router.get("/merge/:attr", async (req, res) => {
+  const data = await getData();
+  const attr = req.params.attr;
+  const number = parseInt(data[0][attr]);
+
+
+  if (!isNumeric(number) && number != 0) {
+    res
+      .status(400)
+      .json({ message: "Invalid parameter, enter a numeric parameter" });
+  } else {
+    const new_data = mergeSort(data, attr);
+    res.send(new_data);
+  }
 });
 
 export default router;

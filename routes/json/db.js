@@ -1,4 +1,4 @@
-const database = [
+const db = [
   {
     id: 1,
     username: "juan123",
@@ -41,4 +41,4 @@ const database = [
   },
 ];
 
-export default database;
+export default db;

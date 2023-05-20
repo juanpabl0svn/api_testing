@@ -15,11 +15,13 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(morgan("dev"));
 
-const PORT = process.env.PORT || 5000;
+export const PORT = process.env.PORT || 5000;
 
 app.use(get_router);
 app.use(post_router);
 app.use('/order',get_router_order)
 
 app.listen(PORT, () => console.log(`listening on port ${PORT}`));
+
+export default PORT
 
