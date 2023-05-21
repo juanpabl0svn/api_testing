@@ -35,46 +35,58 @@ export const quickSort = (list, attr) => {
   return left_list.concat([pivot]).concat(right_list);
 };
 
-export const radixSort = (list) => {
-  const max = Math.max(...list).toString();
+export const radixSort = (list, attr) => {
+  try {
 
-  for (let char = 0; char < list.length; char++) {
-    const string = list[char].toString();
-    const zeros = max.length - string.length;
-    list[char] = "0".repeat(zeros) + string;
-  }
+    let max = list[0][attr];
 
-  for (let i = 1; i < max.length + 1; i++) {
-    const dict = {
-      0: [],
-      1: [],
-      2: [],
-      3: [],
-      4: [],
-      5: [],
-      6: [],
-      7: [],
-      8: [],
-      9: [],
-    };
-    const new_list = [];
+    //convertir a entero el attr y encontrar el max
+    list.forEach((el) => {
+      el[attr] = parseInt(el[attr]);
+      if (el[attr] > max) {
+        max = el[attr];
+      }
+    });
 
-    for (let j = 0; j < list.length; j++) {
-      let digit = list[i].toString();
-      dict[digit[max.length - i]].push(digit);
-      console.log(dict[digit[max.length - i]]);
+    max = max.toString();
+
+    for (let char = 0; char < list.length; char++) {
+      let string = list[char][attr].toString();
+      let zeros = max.length - string.length;
+      list[char][attr] = "0".repeat(zeros) + string;
     }
-    console.log(dict);
 
-    for (const element in dict) {
-      new_list.concat(dict[element]);
-      //   console.log(dict[element]);
+    for (let i = 0; i < max.length; i++) {
+      let dict = {
+        0: [],
+        1: [],
+        2: [],
+        3: [],
+        4: [],
+        5: [],
+        6: [],
+        7: [],
+        8: [],
+        9: [],
+      };
+      let new_list = [];
+
+      for (let j = 0; j < list.length; j++) {
+        let digit = list[j][attr].toString();
+        dict[parseInt(digit[max.length - i - 1])].push(list[j]);
+      }
+
+      Object.entries(dict).forEach((el) => {
+        el[1].forEach((item) => new_list.push(item));
+      });
+
+      list = new_list;
     }
-    // console.log('--')
-    list = new_list;
-  }
 
-  return list;
+    return list;
+  } catch (e) {
+    return [];
+  }
 };
 
 export const mergeSort = (list, attr) => {
@@ -136,7 +148,7 @@ export const countingSort = (list, attr) => {
 
     let sortedArr = new Array(list.length);
     for (let i = list.length - 1; i >= 0; i--) {
-      sortedArr[parseInt(count[list[i][attr]]) - 1] = list[i];
+      sortedArr[parseInt(count[parseInt(list[i][attr])]) - 1] = list[i];
       count[parseInt(list[i][attr])]--;
     }
     sortedArr = sortedArr.filter((el) => el != null);
@@ -191,6 +203,8 @@ const heapify = (list, len, i, attr) => {
 };
 
 export default URL;
+
+// radixSort([10,9,97,6,4,11,3,2,22,1000])
 
 // const arr = [
 //   {
@@ -323,4 +337,4 @@ export default URL;
 //     lat_municipio: "4.710989",
 //   },
 // ];
-// heapSort(arr, "cod_institucion");
+// radixSort(arr, "cod_institucion");

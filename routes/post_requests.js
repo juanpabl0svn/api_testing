@@ -3,9 +3,9 @@ import db from "./json/db.js";
 
 const router = Router();
 
-router.post("/", (req, res) => {
+router.post("/:data", (req, res) => {
   try {
-    const { name, surname, role } = req.body;
+    const { name, surname, role } = JSON.parse(req.params.data)
     const id = 1 + db[db.length - 1].id;
     const new_obj = {
       id,
