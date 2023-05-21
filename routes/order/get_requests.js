@@ -1,4 +1,4 @@
-import URL, { bubbleSort, mergeSort, quickSort } from "./algorithms.js";
+import URL, { bubbleSort, countingSort, heapSort, mergeSort, quickSort } from "./algorithms.js";
 import { Router } from "express";
 import db_order from "../json/db_order.js";
 import { PORT } from "../../index.js";
@@ -78,6 +78,38 @@ router.get("/merge/:attr", async (req, res) => {
       .json({ message: "Invalid parameter, enter a numeric parameter" });
   } else {
     const new_data = mergeSort(data, attr);
+    res.send(new_data);
+  }
+});
+
+router.get("/counting/:attr", async (req, res) => {
+  const data = await getData();
+  const attr = req.params.attr;
+  const number = parseInt(data[0][attr]);
+
+  if (!isNumeric(number) && number != 0) {
+    res
+      .status(400)
+      .json({ message: "Invalid parameter, enter a numeric parameter" });
+  } else {
+    const new_data = countingSort(data, attr);
+
+    new_data.length === 0 ? res.status(404).json({message: 'Invalid attrbute, it contains or negative number or decimal numbers'}) : res.status(200).json({message: new_data})
+  }
+});
+
+router.get("/heap/:attr", async (req, res) => {
+  const data = await getData();
+  const attr = req.params.attr;
+  const number = parseInt(data[0][attr]);
+
+
+  if (!isNumeric(number) && number != 0) {
+    res
+      .status(400)
+      .json({ message: "Invalid parameter, enter a numeric parameter" });
+  } else {
+    const new_data = heapSort(data, attr);
     res.send(new_data);
   }
 });
