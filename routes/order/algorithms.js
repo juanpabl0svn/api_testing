@@ -43,6 +43,7 @@ const getNumber = (number,max) => {
 
 export const radixSort = (list, attr) => {
   try {
+    if (list[0][attr].includes('.')) return []
     let max = list[0][attr];
 
     //convertir a entero el attr y encontrar el max
@@ -129,6 +130,7 @@ const merge = (left_list, right_list, attr) => {
 
 export const countingSort = (list, attr) => {
   try {
+    if (list[0][attr].includes('.')) return []
     if (list.length === 0) return list;
     let max = parseInt(list[0][attr]);
     for (let i = 1; i < list.length; i++) {
