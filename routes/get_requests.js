@@ -4,7 +4,7 @@ import db from "./json/db.js";
 const router = Router();
 
 router.get("/", (req, res) => {
-  res.send(`<h1>Database test</h1><br/>Hello everyone, welcome to my API, here you will be able to do two thigs, if you want to consult a database with usernames and passwords, put in the pathname /db/ and next ot it you will be able to contult the data in /data, to consult an`,
+  res.send(`<h1>Database test</h1><br/>Hello everyone,here if you want to see the register put in the path <a href="/db/data">/data</a>, if you want to filter the users by rol put <a href="/db/role/Student">/role/ROLEYOUWANT</a>, also you can authenticate here <a href='/db/auth/{"username":"juan123","password":"juanelmejor"}'>/auth/{"username":"YOURUSER","password":"YOURPASSWORD"</a> in JSON format, and finally if you want using the post request you can create your user here/create/"name":"YOURNAME","surname":"YOURSURNAME","role":"YOURROLE"`
   );
 });
 

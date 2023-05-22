@@ -35,26 +35,25 @@ export const quickSort = (list, attr) => {
   return left_list.concat([pivot]).concat(right_list);
 };
 
+const getNumber = (number,max) => {
+  let string = number.toString();
+  let zeros = max.length - string.length;
+  return "0".repeat(zeros) + string;
+};
+
 export const radixSort = (list, attr) => {
   try {
-
     let max = list[0][attr];
 
     //convertir a entero el attr y encontrar el max
     list.forEach((el) => {
-      el[attr] = parseInt(el[attr]);
-      if (el[attr] > max) {
+      if (parseInt(el[attr]) > max) {
         max = el[attr];
       }
     });
 
     max = max.toString();
 
-    for (let char = 0; char < list.length; char++) {
-      let string = list[char][attr].toString();
-      let zeros = max.length - string.length;
-      list[char][attr] = "0".repeat(zeros) + string;
-    }
 
     for (let i = 0; i < max.length; i++) {
       let dict = {
@@ -72,7 +71,7 @@ export const radixSort = (list, attr) => {
       let new_list = [];
 
       for (let j = 0; j < list.length; j++) {
-        let digit = list[j][attr].toString();
+        let digit = getNumber(list[j][attr],max);
         dict[parseInt(digit[max.length - i - 1])].push(list[j]);
       }
 
@@ -85,6 +84,7 @@ export const radixSort = (list, attr) => {
 
     return list;
   } catch (e) {
+    console.log(e);
     return [];
   }
 };
