@@ -1,11 +1,11 @@
 import { Router } from "express";
-import db from "./json/db.js";
+import db from "../../json/db.js";
 
 const router = Router();
 
 router.post("/create/:data", (req, res) => {
   try {
-    const { name, surname, role } = JSON.parse(req.params.data)
+    const { name, surname, role } = JSON.parse(req.params.data);
     const id = 1 + db[db.length - 1].id;
     const new_obj = {
       id,

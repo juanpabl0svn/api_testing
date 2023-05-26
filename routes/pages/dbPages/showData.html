@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        *{
+            color: white;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+        }
+        main{
+            position: absolute;
+            top:50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgb(27, 96, 182);
+            width: 100%;
+        }
+
+        main div {
+            display: grid;
+            padding: 20px;
+        }
+        main div div{
+            display: flex;
+            background: #18a3a8;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            border-radius: 20px;
+            gap: 100px;
+            padding: 10px;
+            margin: 10px;
+        }
+
+        main div div label{
+            width: 10vw;
+        }
+    </style>
+  </head>
+  <body>
+    <main id="main"></main>
+
+    <script>
+      const url = window.location;
+
+      const $ = (el) => document.getElementById(el);
+
+      const body = $("main");
+
+      async function getData() {
+        const req = await fetch(url + "api/db/data");
+        const { message } = await req.json();
+
+        const div = document.createElement("div");
+        message.forEach((el) => {
+          const divSeparator = document.createElement("div");
+          Object.entries(el).forEach((element) => {
+            const label = document.createElement("label");
+            label.innerText = element[1];
+            divSeparator.appendChild(label);
+          });
+          div.appendChild(divSeparator);
+        });
+        body.appendChild(div);
+      }
+
+      getData();
+    </script>
+  </body>
+</html>
