@@ -23,20 +23,38 @@ app.use(morgan("dev"));
 export const PORT = process.env.PORT || 5000;
 
 app.get("/", (req, res) => {
-  res.sendFile(__dirname + '/dbPAges/landPAge.html');
+  res.sendFile(__dirname + '/landPage.html');
 });
 
-app.get("/db", (req, res) => {
-  res.sendFile(__dirname + '/dbPAges/showData.html');
+app.get('/db',(req,res)=>{
+  res.sendFile(__dirname + '/dbPages/explain.html')
+})
+
+app.get("/db/data", (req, res) => {
+  res.sendFile(__dirname + '/dbPages/showData.html');
 });
 
 app.get("/db/role", (req, res) => {
-  res.sendFile(__dirname + '/dbPAges/showRole.html');
+  res.sendFile(__dirname + '/dbPages/showRole.html');
 });
 
 app.get("/db/auth", (req, res) => {
-  res.sendFile(__dirname + '/dbPAges/logIn.html');
+  res.sendFile(__dirname + '/dbPages/logIn.html');
 });
+
+app.get("/db/create", (req, res) => {
+  res.sendFile(__dirname + '/dbPages/newUser.html');
+});
+
+
+
+app.get('/order', (req, res) => {
+  res.sendFile(__dirname + '/orderPages/explain.html');
+})
+
+app.get('/order/data', (req, res) => {
+  res.sendFile(__dirname + '/orderPages/showData.html');
+})
 
 app.use("/api/db", get_router);
 app.use("/api/db", post_router);

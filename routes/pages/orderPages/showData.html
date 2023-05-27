@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Database | Order</title>
+    <style>
+      * {
+        color: white;
+        margin: 0;
+        padding: 0;
+        font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+      }
+      body {
+        padding-top: 40px;
+      }
+      main {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgb(27, 96, 182);
+        overflow: auto;
+      }
+
+      main div {
+        display: grid;
+        padding: 20px;
+      }
+
+      main div div {
+        display: flex;
+        background: #18a3a8;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        border-radius: 20px;
+        gap: 100px;
+        padding: 10px;
+        margin: 10px;
+      }
+      main div div label {
+        width: 20vw;
+        text-align: center;
+      }
+      .header{
+        color:black
+      }
+    </style>
+  </head>
+  <body>
+    <main id="main">
+    </main>
+
+    <script>
+      const url = "http://" + window.location.host;
+
+      const $ = (el) => document.getElementById(el);
+
+      const body = $("main");
+
+      const header = $("header");
+
+      async function getData() {
+        const req = await fetch(url + "/api/order/data");
+        const { message } = await req.json();
+
+        const div = document.createElement("div");
+
+        const div_header_separator = document.createElement("div");
+
+        Object.keys(message[0]).forEach((el) => {
+          const label_header = document.createElement("label");
+          label_header.className = "header";
+          label_header.innerText = el;
+          div_header_separator.appendChild(label_header);
+        });
+
+        div.appendChild(div_header_separator)
+
+        message.forEach((el) => {
+          const divSeparator = document.createElement("div");
+          Object.entries(el).forEach((element) => {
+            const label = document.createElement("label");
+            label.innerText = element[1];
+            divSeparator.appendChild(label);
+          });
+          div.appendChild(divSeparator);
+        });
+        body.appendChild(div);
+      }
+      getData();
+    </script>
+  </body>
+</html>

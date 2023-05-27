@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Database</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+      }
+      body {
+        background: #00d9ff12;
+      }
+      main {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgb(27, 96, 182);
+        width: 100%;
+      }
+
+      main div {
+        display: grid;
+        padding: 20px;
+      }
+      main div div {
+        display: flex;
+        background: #18a3a8;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        border-radius: 20px;
+        gap: 100px;
+        padding: 10px;
+        margin: 10px;
+      }
+      main div div label {
+        width: 10vw;
+      }
+    </style>
+  </head>
+  <body>
+    <main id="main">
+      <form id="form">
+        <input type="text" id="name" placeholder="Nombre" required />
+        <input type="text" id="surname" placeholder="Apellido" required />
+        <input type="text" id="role" placeholder="Rol" required />
+        <input type="submit" value="Enivar" />
+      </form>
+    </main>
+
+    <script>
+      const url = "http://" + window.location.host;
+
+      const $ = (el) => document.getElementById(el);
+
+      const body = $("main");
+
+      const form = $("form");
+
+      const name = $("name");
+      const surname = $("surname");
+      const role = $("role");
+
+      form.onsubmit = (e) => {
+        e.preventDefault();
+
+        const data = {
+          name: name.value,
+          surname: surname.value,
+          role: role.value,
+        };
+
+        getData(JSON.stringify(data));
+      };
+
+      async function getData(data) {
+        const req = await fetch(url + `/api/db/create/${data}`, {
+          method: "POST",
+        });
+        const { message } = await req.json();
+
+        main.innerHTML = message;
+
+        // const div = document.createElement("div");
+        // message.forEach((el) => {
+        //   const divSeparator = document.createElement("div");
+        //   Object.entries(el).forEach((element) => {
+        //     const label = document.createElement("label");
+        //     label.innerText = element[1];
+        //     divSeparator.appendChild(label);
+        //   });
+        //   div.appendChild(divSeparator);
+        // });
+        // body.appendChild(div);
+      }
+    </script>
+  </body>
+</html>

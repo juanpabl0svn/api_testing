@@ -4,15 +4,16 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Log In</title>
   </head>
   <body>
-    <form id="form">
+    <main id="main">
+      <form id="form">
         <input type="text" placeholder="Username" id="username" />
         <input type="text" placeholder="Password" id="password" />
-        <input type="submit" value="Enviar">
-    </form>
-    <main id="main"></main>
+        <input type="submit" value="Enviar" />
+      </form>
+    </main>
 
     <script>
       const url = "http://" + window.location.host;
@@ -21,10 +22,10 @@
 
       const body = $("main");
 
-      const form = $('form')
+      const form = $("form");
 
-      const username = $('username')
-      const password = $('password')
+      const username = $("username");
+      const password = $("password");
 
       async function getData(data) {
         body.innerHTML = "";
@@ -32,19 +33,21 @@
         const req = await fetch(url + `/api/db/auth/${data}`);
         const { message } = await req.json();
 
+        const label = document.createElement("label");
 
-        body.innerHTML = message;
+        label.innerText = message;
+
+        body.appendChild(label);
       }
 
       form.onsubmit = (e) => {
-          e.preventDefault();
-          const data = {
-            username:  username.value,
-            password: password.value
-          }
-          getData(JSON.stringify(data))
+        e.preventDefault();
+        const data = {
+          username: username.value,
+          password: password.value,
         };
-        
+        getData(JSON.stringify(data));
+      };
     </script>
   </body>
 </html>
