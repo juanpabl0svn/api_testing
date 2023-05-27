@@ -23,10 +23,19 @@ app.use(morgan("dev"));
 export const PORT = process.env.PORT || 5000;
 
 app.get("/", (req, res) => {
-  // res.send(
-  //   `<h1>API Presentation</h1><br/>Hello everyone, welcome to my API, here you will be able to do two thigs, if you want to consult a database with usernames and passwords, put in the pathname <a href='/api/db'>/db</a> or if you want to organize another database with different order algorithms, put in the path <a href='/api/order'>/order</a>`
-  // );
+  res.sendFile(__dirname + '/dbPAges/landPAge.html');
+});
+
+app.get("/db", (req, res) => {
   res.sendFile(__dirname + '/dbPAges/showData.html');
+});
+
+app.get("/db/role", (req, res) => {
+  res.sendFile(__dirname + '/dbPAges/showRole.html');
+});
+
+app.get("/db/auth", (req, res) => {
+  res.sendFile(__dirname + '/dbPAges/logIn.html');
 });
 
 app.use("/api/db", get_router);
