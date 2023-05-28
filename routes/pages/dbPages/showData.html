@@ -46,7 +46,9 @@
     <main id="main"></main>
 
     <script>
-      const url = 'http://' + window.location.host
+      const url = window.location.protocol+ '//' + window.location.host
+
+      console.log(url)
 
       const $ = (el) => document.getElementById(el);
 

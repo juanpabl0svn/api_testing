@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import morgan from "morgan";
-import path from "path";
+
 
 import {} from "dotenv/config.js";
 import bodyParser from "body-parser";
