@@ -55,6 +55,9 @@ app.get('/order', (req, res) => {
 app.get('/order/data', (req, res) => {
   res.sendFile(__dirname + '/orderPages/showData.html');
 })
+app.get('/order/methods', (req, res) => {
+  res.sendFile(__dirname + '/orderPages/order.html');
+})
 
 app.use("/api/db", get_router);
 app.use("/api/db", post_router);

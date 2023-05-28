@@ -8,7 +8,6 @@ import URL, {
 } from "./algorithms.js";
 import { Router } from "express";
 import db_order from "../../json/db_order.js";
-import { PORT } from "../../../index.js";
 
 const router = Router();
 
@@ -28,10 +27,6 @@ const getData = async () => {
   }
 };
 
-router.get("/", (req, res) => {
-  res.send(`<h1>Order Algorithms</h1><br/>Welcome to order algorithms, here you will be able to order a public database, which you can see in the path next path <a href="/api/order/data">Database</a>, you will also be able to order these registers using this algoritms and giving as a parameter an atribute of the database, here are some examples <a href="/api/order/bubble/cod_institucion">Bubble sort</a>, <a href="/api/order/quick/cod_institucion">Quick sort</a>, <a href="/api/order/merge/cod_institucion">Merge sort</a>,<a href="/api/order/counting/cod_institucion">Counting sort</a>, <a href="/api/order/radix/cod_institucion">Radix sort</a>,you can use whichever you want writting in the current path <b>"/ORDER_ALGORITHM/ATTRIBUTE"</b>, if the attribure is <b>NaN</b> or it contains constraits in the algoritm (decimals or negative number) it will throw an error, thanks for reading this and feel free to use this API`
-  );
-});
 
 router.get("/data", async (req, res) => {
   const data = await getData();
@@ -119,7 +114,7 @@ router.get("/heap/:attr", async (req, res) => {
       .json({ message: "Invalid parameter, enter a numeric parameter" });
   } else {
     const new_data = heapSort(data, attr);
-    res.send(new_data);
+    res.status(200).json({message : new_data});
   }
 });
 
