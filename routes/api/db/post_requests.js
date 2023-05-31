@@ -8,9 +8,11 @@ router.post("/create/:data", (req, res) => {
     const { name, surname, role } = JSON.parse(req.params.data);
     const id = 1 + db[db.length - 1].id;
     const username = name + '123'
+    const password = name + 'Error404'
     const new_obj = {
       id,
       username,
+      password,
       name,
       surname,
       role,

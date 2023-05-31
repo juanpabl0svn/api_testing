@@ -14,19 +14,35 @@
       body {
         background: #00d9ff12;
       }
+      html{
+          background: #50bfe0fb;
+        }
       main {
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        background: rgb(27, 96, 182);
-        width: 100%;
+        width: 25%;
+        height: 40%;
+        background: #ffffff;
+        border-radius: 30px;
+
+        display: grid;
+        place-items: center;
       }
 
       main div {
         display: grid;
         padding: 20px;
       }
+
+      input{
+          border-radius: 10px;
+          outline: None;
+          border: none;
+          padding: 8px;
+          background: #d4d0d0;
+        }
       main div div {
         display: flex;
         background: #18a3a8;
@@ -39,6 +55,13 @@
       main div div label {
         width: 10vw;
       }
+      form{
+        display: flex;
+        flex-direction: column;
+        width: 60%;
+        gap: 3px;
+
+      }
     </style>
   </head>
   <body>
@@ -49,6 +72,7 @@
         <input type="text" id="role" placeholder="Rol" required />
         <input type="submit" value="Enivar" />
       </form>
+      <p id="message_user"></p>
     </main>
 
     <script>
@@ -60,6 +84,8 @@
       const body = $("main");
 
       const form = $("form");
+
+      const message_user = $("message_user")
 
       const name = $("name");
       const surname = $("surname");
@@ -83,19 +109,11 @@
         });
         const { message } = await req.json();
 
-        main.innerHTML = message;
+        message_user.innerHTML = message;
 
-        // const div = document.createElement("div");
-        // message.forEach((el) => {
-        //   const divSeparator = document.createElement("div");
-        //   Object.entries(el).forEach((element) => {
-        //     const label = document.createElement("label");
-        //     label.innerText = element[1];
-        //     divSeparator.appendChild(label);
-        //   });
-        //   div.appendChild(divSeparator);
-        // });
-        // body.appendChild(div);
+        name.innerText = ''
+        surname.innerText = ''
+        role.innerText = ''
       }
     </script>
   </body>

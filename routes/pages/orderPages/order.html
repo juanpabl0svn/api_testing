@@ -51,10 +51,16 @@
       .header {
         color: black;
       }
-      .selects{
+      .selects {
         position: fixed;
         z-index: 1;
         top: 0;
+      }
+      select{
+        border-radius: 10px;
+        outline: None;
+        border: none;
+        padding: 8px;
       }
     </style>
   </head>
@@ -77,8 +83,7 @@
     </main>
 
     <script>
-      const url = window.location.origin
-
+      const url = window.location.origin;
 
       const $ = (el) => document.getElementById(el);
 

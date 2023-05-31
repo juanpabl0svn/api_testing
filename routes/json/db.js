@@ -2,7 +2,7 @@ const db = [
   {
     id: 1,
     username: "juan123",
-    password: "juanelmejor",
+    password: "juanError404",
     name: "Juan",
     surname: "Sanchez",
     role: "Student",
@@ -10,7 +10,7 @@ const db = [
   {
     id: 2,
     username: "jose123",
-    password: "joseelmejor",
+    password: "joseError404",
     name: "Jose",
     surname: "Sanchez",
     role: "Student",
@@ -26,7 +26,7 @@ const db = [
   {
     id: 4,
     username: "juanfer123",
-    password: "juanferelmejor",
+    password: "juanferError404",
     name: "Juan Fernando",
     surname: "Sanchez",
     role: "Engineer",
@@ -34,7 +34,7 @@ const db = [
   {
     id: 5,
     username: "sara123",
-    password: "saralamejor",
+    password: "saraError404",
     name: "Sara",
     surname: "Gomez",
     role: "Student",

@@ -5,14 +5,48 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Log In</title>
+    <style>
+      html{
+          background: #50bfe0fb;
+        }
+        main{
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 25%;
+
+          transform: translate(-50%, -50%);
+          display: grid;
+          place-items: center;
+          background: #ffffff;
+          padding-top: 6vh;
+
+          border-radius: 30px;
+        }
+        input{
+          border-radius: 10px;
+          outline: None;
+          border: none;
+          padding: 8px;
+          background: #d4d0d0;
+        }
+        form{
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          width: 70%;
+          gap: 5px;
+        }
+    </style>
   </head>
   <body>
     <main id="main">
       <form id="form">
         <input type="text" placeholder="Username" id="username" />
-        <input type="text" placeholder="Password" id="password" />
+        <input type="password" placeholder="Password" id="password" />
         <input type="submit" value="Enviar" />
       </form>
+      <p id="message_user"></p>
     </main>
 
     <script>
@@ -25,20 +59,18 @@
 
       const form = $("form");
 
+      const message_user = $('message_user')
+
       const username = $("username");
       const password = $("password");
 
       async function getData(data) {
-        body.innerHTML = "";
+        message_user.innerHTML = "";
 
         const req = await fetch(url + `/api/db/auth/${data}`);
         const { message } = await req.json();
 
-        const label = document.createElement("label");
-
-        label.innerText = message;
-
-        body.appendChild(label);
+        message_user.innerText = message
       }
 
       form.onsubmit = (e) => {
