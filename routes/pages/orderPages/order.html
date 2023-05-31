@@ -56,6 +56,10 @@
         z-index: 1;
         top: 0;
       }
+      main div p{
+        position: fixed;
+        top: 50px;
+      }
       select{
         border-radius: 10px;
         outline: None;
@@ -106,7 +110,9 @@
         const { message } = await req.json();
 
         if (!req.ok) {
-          all.innerHTML = message;
+          const p = document.createElement('p')
+          p.innerText = message;
+          all.appendChild(p);
           return;
         }
         const div_header_separator = document.createElement("div");

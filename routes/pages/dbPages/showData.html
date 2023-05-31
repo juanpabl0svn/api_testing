@@ -44,6 +44,9 @@
             width: 10vw;
             text-align: center;
         }
+        .header{
+          color:black !important;
+        }
     </style>
   </head>
   <body>
@@ -51,9 +54,6 @@
 
     <script>
       const url = window.location.origin
-
-      console.log(url)
-
 
       const $ = (el) => document.getElementById(el);
 
@@ -64,6 +64,17 @@
         const { message } = await req.json();
 
         const div = document.createElement("div");
+
+        const div_header_separator = document.createElement("div");
+
+        Object.keys(message[0]).forEach((el) => {
+          const label_header = document.createElement("label");
+          label_header.className = "header";
+          label_header.innerText = el;
+          div_header_separator.appendChild(label_header);
+        }); 
+        div.appendChild(div_header_separator);
+        
         message.forEach((el) => {
           const divSeparator = document.createElement("div");
           Object.entries(el).forEach((element) => {

@@ -18,7 +18,7 @@ const db = [
   {
     id: 3,
     username: "cata123",
-    password: "catalamejor",
+    password: "cataError404",
     name: "Cata",
     surname: "Villegas",
     role: "Engineer",
