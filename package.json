@@ -8,7 +8,8 @@
     "dev": "nodemon index.js",
     "start": "node index.js",
     "vercel-build": "echo hello",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test_create": "k6 run -u 10 -d 10s test_stress.js",
+    "test": "k6 run -u 100 -d 10s test_auth.js"
   },
   "author": "",
   "license": "ISC",
@@ -21,6 +22,7 @@
     "path": "^0.12.7"
   },
   "devDependencies": {
+    "k6": "^0.0.0",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.22"
   }

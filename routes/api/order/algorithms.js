@@ -1,8 +1,8 @@
 const URL = "https://www.datos.gov.co/resource/fvq4-wwtz.json";
 
-export const bubbleSort = (list, attr) => {
-  for (let i = 0; i <= list.length - 2; i++) {
-    for (let j = 0; j <= list.length - i - 2; j++) {
+export const bubbleSort = (list, attr) => {   // --> O(n^2)
+  for (let i = 0; i <= list.length - 2; i++) { // O(n)
+    for (let j = 0; j <= list.length - i - 2; j++) { // O(n)
       if (parseFloat(list[j][attr]) > parseFloat(list[j + 1][attr])) {
         [list[j], list[j + 1]] = [list[j + 1], list[j]];
       }
@@ -11,7 +11,7 @@ export const bubbleSort = (list, attr) => {
   return list;
 };
 
-export const quickSort = (list, attr) => {
+export const quickSort = (list, attr) => { // --> O(n^n)
   const base = list.length;
 
   if (base <= 1) return list;
@@ -35,19 +35,19 @@ export const quickSort = (list, attr) => {
   return left_list.concat([pivot]).concat(right_list);
 };
 
-const getNumber = (number,max) => {
+const getNumber = (number,max) => { // --> O(1)
   let string = number.toString();
   let zeros = max.length - string.length;
   return "0".repeat(zeros) + string;
 };
 
-export const radixSort = (list, attr) => {
+export const radixSort = (list, attr) => { // --> O(n)
   try {
     if (list[0][attr].includes('.')) return []
     let max = list[0][attr];
 
     //convertir a entero el attr y encontrar el max
-    list.forEach((el) => {
+    list.forEach((el) => { // O(n)
       if (parseInt(el[attr]) > max) {
         max = el[attr];
       }
@@ -56,7 +56,7 @@ export const radixSort = (list, attr) => {
     max = max.toString();
 
 
-    for (let i = 0; i < max.length; i++) {
+    for (let i = 0; i < max.length; i++) { // O(n)
       let dict = {
         0: [],
         1: [],
@@ -71,12 +71,12 @@ export const radixSort = (list, attr) => {
       };
       let new_list = [];
 
-      for (let j = 0; j < list.length; j++) {
+      for (let j = 0; j < list.length; j++) { // O(n)
         let digit = getNumber(list[j][attr],max);
         dict[parseInt(digit[max.length - i - 1])].push(list[j]);
       }
 
-      Object.entries(dict).forEach((el) => {
+      Object.entries(dict).forEach((el) => { // O(n)
         el[1].forEach((item) => new_list.push(item));
       });
 
@@ -90,7 +90,7 @@ export const radixSort = (list, attr) => {
   }
 };
 
-export const mergeSort = (list, attr) => {
+export const mergeSort = (list, attr) => { // --> O(n^n)
   const base = list.length;
 
   if (base <= 1) {
@@ -108,7 +108,7 @@ export const mergeSort = (list, attr) => {
   return merge(left_list, right_list, attr);
 };
 
-const merge = (left_list, right_list, attr) => {
+const merge = (left_list, right_list, attr) => { // -->O(n)
   let sortedArray = [];
 
   while (left_list.length && right_list.length) {
@@ -128,7 +128,7 @@ const merge = (left_list, right_list, attr) => {
   return sortedArray;
 };
 
-export const countingSort = (list, attr) => {
+export const countingSort = (list, attr) => { // --> O(n)
   try {
     if (list[0][attr].includes('.')) return []
     if (list.length === 0) return list;
@@ -160,7 +160,7 @@ export const countingSort = (list, attr) => {
   }
 };
 
-export const heapSort = (list, attr) => {
+export const heapSort = (list, attr) => { // --> O(n)
   const len = list.length;
 
   // Construir el heap máximo
@@ -178,7 +178,7 @@ export const heapSort = (list, attr) => {
   return list;
 };
 
-const heapify = (list, len, i, attr) => {
+const heapify = (list, len, i, attr) => { // -->O(n^n)
   let largest = i;
   const left = 2 * i + 1;
   const right = 2 * i + 2;
