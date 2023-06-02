@@ -45,8 +45,11 @@ router.get("/bubble/:attr", async (req, res) => {
       .status(400)
       .json({ message: "Invalid parameter, enter a numeric parameter" });
   } else {
+    const start = Date.now()
     const new_data = bubbleSort(data, attr);
-    res.status(200).json({ message: new_data });
+    const end = Date.now()
+    const time = (end - start)/1000
+    res.status(200).json({ message: new_data ,time});
   }
 });
 
@@ -60,8 +63,11 @@ router.get("/quick/:attr", async (req, res) => {
       .status(400)
       .json({ message: "Invalid parameter, enter a numeric parameter" });
   } else {
+    const start = Date.now()
     const new_data = quickSort(data, attr);
-    res.status(200).json({ message: new_data });
+    const end = Date.now()
+    const time = (end - start)/1000
+    res.status(200).json({ message: new_data ,time});
   }
 });
 
@@ -75,8 +81,11 @@ router.get("/merge/:attr", async (req, res) => {
       .status(400)
       .json({ message: "Invalid parameter, enter a numeric parameter" });
   } else {
+    const start = Date.now()
     const new_data = mergeSort(data, attr);
-    res.status(200).json({ message: new_data });
+    const end = Date.now()
+    const time = (end - start)/1000
+    res.status(200).json({ message: new_data ,time});
   }
 });
 
@@ -90,7 +99,10 @@ router.get("/counting/:attr", async (req, res) => {
       .status(400)
       .json({ message: "Invalid parameter, enter a numeric parameter" });
   } else {
+    const start = Date.now()
     const new_data = countingSort(data, attr);
+    const end = Date.now()
+    const time = (end - start)/1000
 
     new_data.length === 0
       ? res
@@ -99,7 +111,7 @@ router.get("/counting/:attr", async (req, res) => {
             message:
               "Invalid attrbute, it contains or negative number or decimal numbers",
           })
-      : res.status(200).json({ message: new_data });
+      : res.status(200).json({ message: new_data ,time});
   }
 });
 
@@ -113,8 +125,11 @@ router.get("/heap/:attr", async (req, res) => {
       .status(400)
       .json({ message: "Invalid parameter, enter a numeric parameter" });
   } else {
+    const start = Date.now()
     const new_data = heapSort(data, attr);
-    res.status(200).json({message : new_data});
+    const end = Date.now()
+    const time = (end - start)/1000
+    res.status(200).json({ message: new_data ,time});
   }
 });
 
@@ -128,7 +143,10 @@ router.get("/radix/:attr", async (req, res) => {
       .status(400)
       .json({ message: "Invalid parameter, enter a numeric parameter" });
   } else {
+    const start = Date.now()
     const new_data = radixSort(data, attr);
+    const end = Date.now()
+    const time = (end - start)/1000
     new_data.length === 0
       ? res
           .status(404)
@@ -136,7 +154,7 @@ router.get("/radix/:attr", async (req, res) => {
             message:
               "Invalid attrbute, it contains or negative number or decimal numbers",
           })
-      : res.status(200).json({ message: new_data });
+      : res.status(200).json({ message: new_data,time });
   }
 });
 

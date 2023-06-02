@@ -56,17 +56,18 @@
         z-index: 1;
         top: 0;
       }
-      main div p{
+      main div p {
         position: fixed;
         top: 50px;
       }
-      select{
+      select {
         border-radius: 10px;
         outline: None;
         border: none;
         padding: 8px;
       }
     </style>
+    <link rel="stylesheet" href="sweetalert2.min.css" />
   </head>
   <body>
     <div class="selects">
@@ -85,6 +86,8 @@
     <main id="main">
       <div id="all"></div>
     </main>
+    <script src="sweetalert2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
       const url = window.location.origin;
@@ -99,6 +102,8 @@
 
       const method = $("method");
 
+      const options = document.getElementsByTagName("option");
+
       const all = $("all");
 
       async function getData() {
@@ -107,10 +112,10 @@
           url +
             `/api/order/${method.value}/${select.value || "cod_institucion"}`
         );
-        const { message } = await req.json();
+        const { message, time } = await req.json();
 
         if (!req.ok) {
-          const p = document.createElement('p')
+          const p = document.createElement("p");
           p.innerText = message;
           all.appendChild(p);
           return;
@@ -119,10 +124,13 @@
 
         Object.keys(message[0]).forEach((el) => {
           const label_header = document.createElement("label");
-          const option = document.createElement("option");
-          option.value = el;
-          option.innerText = el;
-          select.appendChild(option);
+
+          if (select.length < 30) {
+            const option = document.createElement("option");
+            option.value = el;
+            option.innerText = el;
+            select.appendChild(option);
+          }
 
           label_header.className = "header";
           label_header.innerText = el;
@@ -139,6 +147,11 @@
             divSeparator.appendChild(label);
           });
           all.appendChild(divSeparator);
+        });
+
+        Swal.fire({
+          title: "Time passed",
+          text: `It took ${time} seconds to complete`,
         });
       }
 
