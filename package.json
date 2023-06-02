@@ -9,7 +9,8 @@
     "start": "node index.js",
     "vercel-build": "echo hello",
     "test_create": "k6 run -u 10 -d 10s test_stress.js",
-    "test": "k6 run -u 100 -d 10s test_auth.js"
+    "test": "k6 run -u 100 -d 10s test_auth.js",
+    "test_stress": "k6 run -u 100 -d 10s test_stress_order.js"
   },
   "author": "",
   "license": "ISC",
